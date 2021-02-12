@@ -24,8 +24,8 @@ public class Game extends Canvas implements Runnable {
     private  void render(){
         BufferStrategy bs=getBufferStrategy();
         if(bs==null){
-         createBufferStrategy(3);
-         return;
+            createBufferStrategy(3);
+            return;
         }
         for(int i=0;i<pixels.length;i++){
             pixels[i]=i+tickCount;
@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable {
             try {
                 Thread.sleep((int)unprocessed*1000/60);
             }catch(InterruptedException e){
-               e.printStackTrace();
+                e.printStackTrace();
             }
 
             if(System.currentTimeMillis()-lastTime>1000){
@@ -75,21 +75,21 @@ public class Game extends Canvas implements Runnable {
     }
 
 
-public  static void main(String[] args){
-    Game game=new Game();
-    game.setMinimumSize(new Dimension(WIDTH*scale,HEIGHT*scale));
-    game.setMaximumSize(new Dimension(WIDTH*scale,HEIGHT*scale));
-    game.setPreferredSize(new Dimension(WIDTH*scale,HEIGHT*scale));
+    public  static void main(String[] args){
+        Game game=new Game();
+        game.setMinimumSize(new Dimension(WIDTH*scale,HEIGHT*scale));
+        game.setMaximumSize(new Dimension(WIDTH*scale,HEIGHT*scale));
+        game.setPreferredSize(new Dimension(WIDTH*scale,HEIGHT*scale));
 
-    JFrame frame = new JFrame(Game.GameName);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setLayout(new BorderLayout());
-    frame.add(game);
-    frame.pack();
-    frame.setResizable(false);
-    frame.setLocationRelativeTo(null);
-    frame.setVisible(true);
-    game.start();
+        JFrame frame = new JFrame(Game.GameName);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(game);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        game.start();
 
-}
+    }
 }
