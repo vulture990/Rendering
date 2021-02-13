@@ -18,6 +18,7 @@ public class Screen {
     public Screen(int w,int h,SpriteSheet sheet) {
         this.h=h;
         this.w=w;
+        this.sheet=sheet;
     }
     public void render(int[] pixels,int offs,int rows){
         for(int yt=yScroll>>3;yt<=(yScroll+8)>>3;yt++)
@@ -31,7 +32,7 @@ public class Screen {
                 int x1=x0+8;
                 if(x0<0) x0=0;
                 if(x1>h) x1=h;
-                int titleIdx=(xt & (MAP_WIDTH_MASK) + (yt & (MAP_WIDTH_MASK))*WIDTH
+                int titleIdx=(xt & (MAP_WIDTH_MASK) + (yt & (MAP_WIDTH_MASK))*WIDTH);
                 for(int y=y0;y<y1;y++){
                     int sp=((y-yScroll)&7)* sheet.width + ((x0-xScroll)&7);//sourcepointer
                     int tp=offs+x0+y*rows;//target pointer
