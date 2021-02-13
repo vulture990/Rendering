@@ -1,8 +1,10 @@
 package com.vulture;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable {
     public  static final String GameName="Across the Country";
@@ -13,6 +15,7 @@ public class Game extends Canvas implements Runnable {
     private  int[] pixels=((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     private boolean running=false;
     private int tickCount;
+    private Screen screen ;
     public void start(){
         running=true;
         new Thread(this).start();// for this new thread to run we must set the class in implements Runnable
@@ -21,15 +24,24 @@ public class Game extends Canvas implements Runnable {
     public void stop(){
         running=false;
     }
-    private  void render(){
+    private void init() {
+        try {
+            screen=new Screen(WIDTH,HEIGHT,new SpriteSheet(ImageIO.read(Game.class.getResourceAsStream("/icon.jpg"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void render(){
         BufferStrategy bs=getBufferStrategy();
         if(bs==null){
             createBufferStrategy(3);
             return;
+
         }
-        for(int i=0;i<pixels.length;i++){
-            pixels[i]=i+tickCount;
-        }
+
+
+        screen.render(pixels,0,WIDTH);
         //Graphics g=image.getGraphics();
         //g.setColor(Color.blue);
         //g.fillRect(0,0,WIDTH/2,HEIGHT/2);
@@ -47,6 +59,7 @@ public class Game extends Canvas implements Runnable {
         int frames=0;
         double nsPerTick=100000000000.0/60;
         long lastTime=System.currentTimeMillis();
+        init();
         while(running){
             long now=System.nanoTime();
             unprocessed+=(now - lastTime)/nsPerTick;
