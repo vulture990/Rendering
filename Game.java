@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class Game extends Canvas implements Runnable {
     public  static final String GameName="Across the Country";
-    public static final int HEIGHT=120;
-    public static final int WIDTH=160;
+    public static final int HEIGHT=140;
+    public static final int WIDTH=180;
     public  static final  int scale=3;
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     private  int[] pixels=((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
     }
     private void init() {
         try {
-            screen=new Screen(WIDTH,HEIGHT,new SpriteSheet(ImageIO.read(Game.class.getResourceAsStream("/icon.jpg"))));
+            screen=new Screen(WIDTH,HEIGHT,new SpriteSheet(ImageIO.read(Game.class.getResourceAsStream("/icon2.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,8 +39,6 @@ public class Game extends Canvas implements Runnable {
             return;
 
         }
-
-
         screen.render(pixels,0,WIDTH);
         //Graphics g=image.getGraphics();
         //g.setColor(Color.blue);
